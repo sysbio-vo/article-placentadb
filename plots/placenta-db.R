@@ -35,7 +35,8 @@ blank_theme <- theme_minimal()+
     plot.title=element_text(size=14, face="bold"),
     #legend.title = element_text(colour = "black", size = 16, face = "bold"), 
     legend.title = element_blank(),
-    legend.text = element_text(colour = "black", size = 18)
+    legend.text = element_text(colour = "black", size = 20),
+    legend.position = "bottom"
   )
 
 race.pie <- ggplot(race, aes(fill = variable, ymax = ymax, ymin = ymin, xmax = 100, xmin = 60)) +
@@ -44,7 +45,8 @@ race.pie <- ggplot(race, aes(fill = variable, ymax = ymax, ymin = ymin, xmax = 1
   xlim(c(0, 100)) +
   geom_label_repel(aes(label = paste(round(percentage,2),"%"), x = 100, y = (ymin + ymax)/2),inherit.aes = F, show.legend = F, size = 6)+
   annotate("text", x = 0, y = 0, size = 11, label = "Race") +
-  blank_theme + scale_fill_discrete(breaks = race$variable)
+  blank_theme + scale_fill_discrete(breaks = race$variable) +
+  guides(fill=guide_legend(nrow=length(race$variable),byrow=TRUE))
   
 diagnosis.pie <- ggplot(diagnosis, aes(fill = variable, ymax = ymax, ymin = ymin, xmax = 100, xmin = 60)) +
   geom_rect(colour = "black") +
@@ -52,9 +54,11 @@ diagnosis.pie <- ggplot(diagnosis, aes(fill = variable, ymax = ymax, ymin = ymin
   xlim(c(0, 100)) +
   geom_label_repel(aes(label = paste(round(percentage,2),"%"), x = 100, y = (ymin + ymax)/2),inherit.aes = F, show.legend = F, size = 6)+
   annotate("text", x = 0, y = 0, size = 11, label = "Diagnosis") +
-  blank_theme + scale_fill_discrete(breaks = diagnosis$variable)
+  blank_theme + scale_fill_discrete(breaks = diagnosis$variable) +
+  guides(fill=guide_legend(nrow=length(diagnosis$variable),byrow=TRUE))
 
-pl <- plot_grid(race.pie, diagnosis.pie, nrow=2, align="hv")
 
-save_plot("plots.pdf", nrow=2,
-          base_height=6, base_aspect_ratio = 2.6, pl)
+pl <- plot_grid(race.pie, diagnosis.pie, ncol=2, align="hv")
+
+save_plot("plots.pdf", nrow=1,
+          base_height=8, base_aspect_ratio = 2.6, pl)
