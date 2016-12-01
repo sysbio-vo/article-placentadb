@@ -1,3 +1,5 @@
+# install.packages("ggrepel")
+
 library(ggplot2)
 library(cowplot)
 library(ggfortify)
@@ -5,6 +7,7 @@ library(ggrepel)
 
 race <- read.table("race.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 diagnosis <- read.table("diagnosis.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+
 
 ## calculate percentage 
 
@@ -35,8 +38,9 @@ blank_theme <- theme_minimal()+
     plot.title=element_text(size=14, face="bold"),
     #legend.title = element_text(colour = "black", size = 16, face = "bold"), 
     legend.title = element_blank(),
-    legend.text = element_text(colour = "black", size = 20),
-    legend.position = "bottom"
+    legend.text = element_text(family="serif", colour = "black", size = 20),
+    legend.position="bottom",
+    legend.direction="vertical"
   )
 
 race.pie <- ggplot(race, aes(fill = variable, ymax = ymax, ymin = ymin, xmax = 100, xmin = 60)) +
