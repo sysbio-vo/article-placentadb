@@ -66,8 +66,8 @@ drawPie <- function(table, label){
 diagnosis.pie = drawPie(diagnosis, "Diagnosis")
 gestational_age.pie = drawPie(gestational_age, "Gestational\nAge")
 organism_part.pie = drawPie(organism_part, "Organism\nPart")
-race.pie = drawPie(race, "Race")
+#race.pie = drawPie(race, "Race")
 
-pl <- plot_grid(diagnosis.pie, gestational_age.pie, organism_part.pie, race.pie, ncol=2, nrow=2, align="hv")
+pl <- plot_grid(diagnosis.pie, gestational_age.pie, organism_part.pie, ncol=3, nrow=1, align="hv")
 
-save_plot("../plots/plots.pdf", pl, base_height=8, base_aspect_ratio = 3, nrow=2)
+save_plot("../plots/plots.pdf", pl, base_height=9, base_aspect_ratio = 2.3, nrow=1)
