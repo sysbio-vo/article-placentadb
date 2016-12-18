@@ -1,3 +1,7 @@
 variable	value
-Exact Age	714
-ApproximateAge	367
+First Trimester	32
+Second Trimester	13
+Early Preterm	112
+Late Preterm	381
+Term	420
+Unknown Age Category	136
