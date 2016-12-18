@@ -5,10 +5,10 @@ library(cowplot)
 library(ggfortify)
 library(ggrepel)
 
-race <- read.table("race.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
-diagnosis <- read.table("diagnosis.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
-gestational_age <- read.table("gestational_age.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
-organism_part <- read.table("organism_part.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+race <- read.table("../data/race.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+diagnosis <- read.table("../data/diagnosis.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+gestational_age <- read.table("../data/gestational_age.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+organism_part <- read.table("../data/organism_part.tsv", header = TRUE, sep = "\t", stringsAsFactors = FALSE)
 
 
 ## calculate percentage 
@@ -42,7 +42,7 @@ blankTheme <- theme_minimal()+
         plot.title=element_text(size=14, face="bold"),
         #legend.title = element_text(colour = "black", size = 16, face = "bold"), 
         legend.title = element_blank(),
-        legend.text = element_text(family="serif", colour = "black", size = 25),
+        legend.text = element_text(family="Courier", colour = "black", size = 25, fontface="plain"),
         legend.position="bottom",
         legend.direction="vertical"
   )
@@ -64,15 +64,14 @@ drawPie <- function(table, label){
 # race.pie = drawPie(race, "Race")
 
 diagnosis.pie = drawPie(diagnosis, "Diagnosis")
-gestational_age.pie = drawPie(gestational_age, "Gestational \n Age")
-organism_part.pie = drawPie(organism_part, "Organism \n Part")
+gestational_age.pie = drawPie(gestational_age, "Gestational\nAge")
+organism_part.pie = drawPie(organism_part, "Organism\nPart")
+race.pie = drawPie(race, "Race")
+
+pl1 <- plot_grid(diagnosis.pie, gestational_age.pie, ncol=2, nrow=1, align="hv")
+pl2 <- plot_grid(organism_part.pie, race.pie, ncol=2, nrow=1, align="hv")
+pl <- plot_grid(pl1, pl2, ncol=1, nrow=2, align="hv")
+  
 
 
-
-
-
-pl <- plot_grid(diagnosis.pie, gestational_age.pie, organism_part.pie, ncol=2, nrow=2, align="hv")
-
-save_plot("plots.pdf", pl, base_height=8, base_aspect_ratio = 3)
-
-
+save_plot("../plots/plots.pdf", pl, base_height=8, base_aspect_ratio = 3, nrow=2)
