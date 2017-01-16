@@ -42,7 +42,7 @@ blankTheme <- theme_minimal()+
         plot.title=element_text(size=14, face="bold"),
         #legend.title = element_text(colour = "black", size = 16, face = "bold"), 
         legend.title = element_blank(),
-        legend.text = element_text(family="Courier", colour = "black", size = 25, fontface="plain"),
+        legend.text = element_text(family="sans", colour = "black", size = 25),
         legend.position="bottom",
         legend.direction="vertical"
   )
